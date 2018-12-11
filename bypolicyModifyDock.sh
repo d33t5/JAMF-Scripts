@@ -21,6 +21,11 @@ whichend=""
 [ "$4" != "" ] && [ "$fullpathofapptoadd1" == "" ] && fullpathofapptoadd1=$4
 [ "$5" != "" ] && [ "$dockitemname" == "" ] && dockitemname=$5
 
+# install dockutil on JAMF trigger if it is not already installed
+if [ ! -f "$dockutilapp" ]; then
+  jamf policy -trigger main_dockutil
+fi
+
 dock_item_find=`sudo -u $loggedInUser $dockutilapp --find "$dockitemname"`
 
 if [[ $dock_item_find == *was\ found* ]]
