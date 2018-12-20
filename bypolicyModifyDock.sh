@@ -13,23 +13,20 @@
 dockutilapp=/usr/local/bin/dockutil
 loggedInUser=`python -c 'from SystemConfiguration import SCDynamicStoreCopyConsoleUser; import sys; username = (SCDynamicStoreCopyConsoleUser(None, None, None) or [None])[0]; username = [username,""][username in [u"loginwindow", None, u""]]; sys.stdout.write(username + "\n");'`
 
-fullpathofapptoadd1=""
-fullpathofapptoadd2=""
-fullpathofapptoadd3=""
+fullpathofapptoadd=""
 whichend=""
+dockitemname=""
 
-[ "$4" != "" ] && [ "$fullpathofapptoadd1" == "" ] && fullpathofapptoadd1=$4
+[ "$4" != "" ] && [ "$fullpathofapptoadd" == "" ] && fullpathofapptoadd=$4
 [ "$5" != "" ] && [ "$dockitemname" == "" ] && dockitemname=$5
 
-# install dockutil on JAMF trigger if it is not already installed
 if [ ! -f "$dockutilapp" ]; then
   jamf policy -trigger main_dockutil
 fi
 
-dock_item_find=`sudo -u $loggedInUser $dockutilapp --find "$dockitemname"`
+dock_item_find=$(sudo -u $loggedInUser $dockutilapp --find "$dockitemname")
 
-if [[ $dock_item_find == *was\ found* ]]
-    then
+if [[ $dock_item_find == *was\ found* ]]; then
         #dock item is found
         echo "Skipping '$dockitemname' (Item already in dock)."
     else
