@@ -62,4 +62,4 @@ killall cfprefsd
 launchctl bootstrap gui/$loggedInUID $launchAgent
 
 echo "Notifying user..."
-/usr/local/bin/yo_scheduler -t "File Share Added to NoMAD" -n "You can now access this from the NoMAD menu bar"
+su $loggedInUser -c '/usr/local/bin/yo_scheduler -t "File Share Added to NoMAD" -n "You can now access this from the NoMAD menu bar"'
