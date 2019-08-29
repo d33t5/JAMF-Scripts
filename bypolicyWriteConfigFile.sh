@@ -44,5 +44,3 @@ defaults write "$configFolder"/"$plistName" "$keyLabel" "$valueType" "$keyValue"
 # Modify permissions to be able to easily read file
 
 chmod 755 "$configFolder"/"$plistName"
-
-jamf recon
