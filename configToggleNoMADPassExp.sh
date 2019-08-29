@@ -7,7 +7,7 @@
 #
 
 launchAgent="/Library/LaunchAgents/com.trusourcelabs.NoMAD.plist"
-loggedInUser=`python -c 'from SystemConfiguration import SCDynamicStoreCopyConsoleUser; import sys; username = (SCDynamicStoreCopyConsoleUser(None, None, None) or [None])[0]; username = [username,""][username in [u"loginwindow", None, u""]]; sys.stdout.write(username + "\n");'`
+loggedInUser=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
 loggedInUID=$(id -u $loggedInUser)
 currentSetting=$(defaults read /Users/$loggedInUser/Library/Preferences/com.trusourcelabs.NoMAD.plist HideExpiration)
 
