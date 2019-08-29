@@ -8,12 +8,13 @@
 #
 # 	Populate script parameters to match the variables below.
 #   Pass in values into these parameters during a policy.
-#   Requites Yo to be installed for success notification
+#   Requires Yo to be installed for success notification
 #
+
 
 launchAgent="/Library/LaunchAgents/com.trusourcelabs.NoMAD.plist"
 sharesPlist="/Library/Preferences/menu.nomad.shares.plist"
-loggedInUser=`python -c 'from SystemConfiguration import SCDynamicStoreCopyConsoleUser; import sys; username = (SCDynamicStoreCopyConsoleUser(None, None, None) or [None])[0]; username = [username,""][username in [u"loginwindow", None, u""]]; sys.stdout.write(username + "\n");'`
+loggedInUser=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
 loggedInUID=$(id -u $loggedInUser)
 jamfHelper="/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfhelper"
 jamfhelpericon="/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertCautionIcon.icns"
