@@ -14,7 +14,6 @@
 nameofprinter=""
 fqdnofprinter=""
 location=""
-lpadminBin=/usr/sbin/lpadmin
 
 [ "$4" != "" ] && [ "$nameofprinter" == "" ] && nameofprinter=$4
 [ "$5" != "" ] && [ "$fqdnofprinter" == "" ] && fqdnofprinter=$5
@@ -29,7 +28,7 @@ echo "Looking for printer to remove..."
 
 if [ "$installedprinter" != "" ];then
 	echo "Found printer named $nameofprinter. Removing..."
-	$lpadminBin -x "$nameofprinter"
+	/usr/sbin/lpadmin -x "$nameofprinter"
 	echo "$nameofprinter removed."
 	else
 	echo "No printer installed with name $nameofprinter"
@@ -39,7 +38,7 @@ fi
 echo "Setting printer $nameofprinter..."
 
 echo "Setting printer as AirPrint"
-$lpadminBin -p "$nameofprinter" \
+/usr/sbin/lpadmin -p "$nameofprinter" \
 -L "$location" \
 -D "$nameofprinter" \
 -E -v ipp://$fqdnofprinter/ipp/print \
