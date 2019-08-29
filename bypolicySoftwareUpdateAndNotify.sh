@@ -21,10 +21,10 @@ fullpathofapptoremove=""
 
 apprunning=`pgrep -x "$process"`
 jamfhelperrunning=`pgrep jamfhelper`
-loggedinuser=`ls -l /dev/console | awk '{ print $3 }'`
+loggedInUser=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
 
 
-echo "User logged in running update = $loggedinuser"
+echo "User logged in running update = $loggedInUser"
 echo "Looking for Process $process"
 
 # uncomment these if you just want to kill the app rather than notify user
