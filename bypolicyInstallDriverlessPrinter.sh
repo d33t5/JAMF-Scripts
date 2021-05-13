@@ -35,9 +35,8 @@ if [ "$installedprinter" != "" ];then
 	echo "Continuing..."
 fi
 
-echo "Setting printer $nameofprinter..."
+echo "Setting up printer $nameofprinter..."
 
-echo "Setting printer as AirPrint"
 /usr/sbin/lpadmin -p "$nameofprinter" \
 -L "$location" \
 -D "$nameofprinter" \
