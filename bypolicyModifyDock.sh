@@ -2,8 +2,8 @@
 
 #
 # SYNOPSIS - How to use
-#	Run via a policy to add or remove app from dock.
-# https://github.com/kcrawford/dockutil needs to be instlled on the Mac
+#	  Run via a policy to add app from dock.
+#   https://github.com/kcrawford/dockutil needs to be instlled on the Mac
 #
 # DESCRIPTION
 #
